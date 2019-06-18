@@ -58,9 +58,6 @@ class viewNewProducto
                 <input class="form-control" type="text" name="preciooferta" value="" required>
             </div>
         </div>
-        <div class="row">
-            <input class="form-control" type="hidden" name="visible" value="0">
-        </div>
         <br>
         <div class="row">
             <div class="col-md-6">

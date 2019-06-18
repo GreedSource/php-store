@@ -1,27 +1,35 @@
 <?php
-include_once("trigger/ProductoDisplayTrigger.php");
+
 include_once("template/MasterPage.php");
 
-if(!isset($_REQUEST['action']))
-{
-	$tmp = MasterPage::GetMaster();
-	echo $tmp->GetPage();
+/*session_name('login');
+session_start();*/
+date_default_timezone_set('America/Merida');
 
-	$tb=ProductoDisplayTrigger::GetDisplay();	 
-	echo $tb->GetTable();
-	
-	echo '<a href="guardar" class="btn btn-outline btn-success pull-right"> 
-	<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Nuevo Producto
-	</a>
-	<a href="?action=json" class="btn btn-outline btn-success pull-right"> 
-	<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Ver JSON
-	</a>';
-	$script = '<script src="js/script_producto.js" text="text/javascript"></script>';
-	echo $tmp->GetFooter($script);
-}else{
-	if($_REQUEST['action'] === "json"){
-		$tb=ProductoDisplayTrigger::GetDisplay();	 
-		header('Content-Type: application/json');
-		echo $tb->GetJSON();	
-	}
+setlocale(LC_TIME, 'spanish');
+// Ruta del proyecto, cambiala por la ruta que vas a usar
+define( 'RUTA_HTTP', 'http://' . $_SERVER['HTTP_HOST'] . '/arquitectura/' );
+
+//error_reporting(0);
+// Todo esta lógica hara el papel de un FrontController
+
+require_once('controller/ProductController.php');
+
+
+if(!isset($_REQUEST['c'])){
+    $controller = new ProductController();
+    $controller->Index();
+} else {
+
+    // Obtenemos el controlador que queremos cargar
+    $controller = $_REQUEST['c'] . 'Controller';
+    $accion     = isset($_REQUEST['a']) ? $_REQUEST['a'] : 'Index';
+
+    require_once("controller/".$_REQUEST['c']."Controller.php");
+    // Instanciamos el controlador
+    $controller = new $controller();
+
+    // Llama la accion
+    call_user_func( array( $controller, $accion ) );
 }
+

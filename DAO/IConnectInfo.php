@@ -6,7 +6,7 @@ interface IConnectInfo
     const HOST ="localhost";
     const UNAME ="root";
     const PW ="";
-    const DBNAME = "bdproducto";
+    const DBNAME = "bd_store";
     public function doConnect();
 }
 ?>

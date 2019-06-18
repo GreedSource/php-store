@@ -15,22 +15,25 @@ class ProductoDisplayTrigger
 	}
 	private function GenerateHeaderTable()
 	{
-		include_once("service/ClientCtrl.php");
-		$trigger=new ClientCtrl();
+		include_once("model/ProductModel.php");
+		$trigger=new ProductModel();
 		$data = $trigger->showAll();
 		//var_dump($data);
 		$table = "";
 		foreach($data as $item)
 		{	
 			$table .= '<tr>'
-					. '<td>'.$item->clave.'</td>'
-					. '<td>'.utf8_encode($item->nombre).'</td>'
-					. '<td>'.utf8_encode($item->descripcion).'</td>'
-					. '<td>'.$item->precio.'</td>'
-					. '<td><a href="javascript:void();" onclick="Update('.$item->clave.')" class="btn btn-primary btn-circle"><i class="fa fa-list">
+					. '<td>'.$item->id_product.'</td>'
+					. '<td>'.utf8_encode($item->name).'</td>'
+					. '<td>'.utf8_encode($item->description).'</td>'
+					. '<td>'.$item->price.'</td>'
+					. '<td>'.$item->stock.'</td>'
+					. '<td>'.date('Y-m-d', strtotime($item->created_at)).'</td>'
+					. '<td>'.date('Y-m-d', strtotime($item->updated_at)).'</td>'
+					. '<td><a href="javascript:void();" onclick="Update('.$item->id_product.')" class="btn btn-primary btn-circle"><i class="fa fa-list">
 						</i></a></td>'
 					. '<td><a href="javascript:void();" class="btn btn-warning btn-circle" 
-							onClick="Desactivar('.$item->clave.');"><i class="fa fa-times">
+							onClick="Desactivar('.$item->id_product.');"><i class="fa fa-times">
 							</i></a></td>'
 					. '</tr>';
 		}
@@ -39,13 +42,22 @@ class ProductoDisplayTrigger
 	private function GenerateTable()
 	{
 		
-		$obj='<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+		$obj = '<div class="box-header">
+            <h3 class="box-title">Product</h3> <a href="?c=product&a=AddProduct" class="btn btn-block btn-success btn-flat pull-right" style="width:150px"> 
+			<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Nuevo Producto
+			</a>
+          </div>
+          <div class="box-body">
+		<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
 			<thead>
 				<tr>
 					<th>Clave</th>
 					<th>Nombre</th>
 					<th>Descripción</th>
-					<th>precio</th>							
+					<th>Precio</th>
+					<th>Stock</th>
+					<th>Creado</th>
+					<th>Actualizado</th>
 					<th>Modificar</th>
 					<th>Desactivar</th>
 				</tr>
@@ -53,24 +65,9 @@ class ProductoDisplayTrigger
 			<tbody>
 			'.$this->GenerateHeaderTable().'
 			</tbody>
-		</table>';
+		</table>
+		</div>';
 		return $obj;
-	}
-
-	private function GenerateJSON(){
-		include_once("service/ClientCtrl.php");
-		$trigger=new ClientCtrl();
-		$data = $trigger->showAll();
-		$json = Array();
-		foreach ($data as $item) {
-			$tmp = Array("clave" => utf8_decode($item->clave), "nombre" => utf8_encode($item->nombre), "descripcion" => utf8_encode($item->descripcion), "precio" => utf8_encode($item->precio), "preciooferta" => utf8_encode($item->preciooferta), "visible" => utf8_encode($item->visible));
-			array_push($json, $tmp);
-		}
-		return json_encode($json);
-	}
-
-	public function GetJSON(){
-		return $this->GenerateJSON();
 	}
 
 	public function GetTable()

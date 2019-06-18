@@ -1,26 +1,31 @@
 <?php
-include "Base.php";
-include "IStrategy.php";
-include "VO\ProductoVO.php";
+include_once "Base.php";
+include_once "IStrategy.php";
+include_once "VO\ProductoVO.php";
 
 class ProductoDisplayData extends Base implements IStrategy{
-    private $tabla = 'productotb'; 
+    private $tabla = 'product'; 
     public function algorithm(){
-        $_sql = "SELECT * FROM {$this->tabla};";  
+        $_sql = "SELECT * FROM {$this->tabla} WHERE active = 1";  
         $this->query($_sql);
         $data=$this->resultset();
-        //var_dump($data);
         $result = array();
         foreach($data as $r)
             {
                 $obj = new ProductoVO();
+                $obj->__SET('id_product', $r["id_product"]);
+                $obj->__SET('name', $r["name"]);
+                $obj->__SET('description', $r["description"]);
+                $obj->__SET('price', $r["price"]);
+                $obj->__SET('stock', $r["stock"]);
+                $obj->__SET('product_img', $r["product_img"]);
+                $obj->__SET('active', $r["active"]);
+                $obj->__SET('id_brand', $r["id_brand"]);
+                $obj->__SET('id_supplier', $r["id_supplier"]);
+                $obj->__SET('id_category', $r["id_category"]);
+                $obj->__SET('created_at', $r["created_at"]);
+                $obj->__SET('updated_at', $r["updated_at"]);
 
-                $obj->clave = $r["clave"];
-                $obj->__SET('nombre', $r["nombre"]);
-                $obj->__SET('descripcion', $r["descripcion"]);
-                $obj->__SET('precio', $r["precio"]);
-                $obj->__SET('preciooferta', $r["preciooferta"]);
-                $obj->__SET('visible', $r["visible"]);
                 $result[] = $obj;
             }
         return $result;  

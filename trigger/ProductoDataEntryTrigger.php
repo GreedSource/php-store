@@ -24,8 +24,8 @@ class ProductoDataEntryTrigger
         trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
     }
     public function GetDataEntry(){
-        include_once("service/ClientCtrl.php");
-        $trigger = new ClientCtrl();
+        include_once("model/ProductModel.php");
+        $trigger = new ProductModel();
         $entry = $trigger->insertData();
         return $entry;
     }

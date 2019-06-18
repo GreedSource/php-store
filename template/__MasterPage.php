@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class MasterPage
 {
     private static $instancia;
@@ -16,33 +16,36 @@ class MasterPage
     private function GenerateCSS()
 	{
         $css ='<!-- BEGIN STYLESHEETS -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900"  type="text/css"/>
-		<link type="text/css" rel="stylesheet" href="recursos/styletemplate/assets/css/theme-default/bootstrap.css?1422792965" />
-		<link type="text/css" rel="stylesheet" href="recursos/styletemplate/assets/css/theme-default/materialadmin.css?1425466319" />
-		<link type="text/css" rel="stylesheet" href="recursos/styletemplate/assets/css/theme-default/font-awesome.min.css?1422529194" />
-		<link type="text/css" rel="stylesheet" href="recursos/styletemplate/assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		<!--<link href="http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900"  type="text/css"/>-->
+		<link type="text/css" rel="stylesheet" href="'.RUTA_HTTP.'assets/css/theme-default/bootstrap.css?1422792965" />
+		<link type="text/css" rel="stylesheet" href="'.RUTA_HTTP.'assets/css/theme-default/materialadmin.css?1425466319" />
+		<link type="text/css" rel="stylesheet" href="'.RUTA_HTTP.'assets/css/theme-default/font-awesome.min.css?1422529194" />
+		<link type="text/css" rel="stylesheet" href="'.RUTA_HTTP.'assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		<link type="text/css" rel="stylesheet" href="'.RUTA_HTTP.'css/sweetalert2.min.css">
 		<!-- END STYLESHEETS -->';
         return  $css;
     }
     private function GenerateJS($codigo)
 	{
         $js = '	<!-- BEGIN JAVASCRIPT -->
-		<script src="./assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
-		<script src="./assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
-		<script src="./assets/js/libs/bootstrap/bootstrap.min.js"></script>
-		<script src="./assets/js/libs/spin.js/spin.min.js"></script>
-		<script src="./assets/js/libs/autosize/jquery.autosize.min.js"></script>
-		<script src="./assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
-		<script src="./assets/js/core/source/App.js"></script>
-		<script src="./assets/js/core/source/AppNavigation.js"></script>
-		<script src="./assets/js/core/source/AppOffcanvas.js"></script>
-		<script src="./assets/js/core/source/AppCard.js"></script>
-		<script src="./assets/js/core/source/AppForm.js"></script>
-		<script src="./assets/js/core/source/AppNavSearch.js"></script>
-		<script src="./assets/js/core/source/AppVendor.js"></script>
-        <script src="./assets/js/core/demo/Demo.js"></script>
-        <script src="./assets/js/libs/bootstrap-dialog/js/bootstrap-dialog.js"></script>
-		<!-- END JAVASCRIPT -->'.$codigo;
+		<script src="'.RUTA_HTTP.'assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/libs/bootstrap/bootstrap.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/libs/spin.js/spin.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/libs/autosize/jquery.autosize.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/libs/nanoscroller/jquery.nanoscroller.min.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/App.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppNavigation.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppOffcanvas.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppCard.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppForm.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppNavSearch.js"></script>
+		<script src="'.RUTA_HTTP.'assets/js/core/source/AppVendor.js"></script>
+        <script src="'.RUTA_HTTP.'assets/js/core/demo/Demo.js"></script>
+        <script src="'.RUTA_HTTP.'assets/js/libs/bootstrap-dialog/js/bootstrap-dialog.js"></script>
+        <script src="'.RUTA_HTTP.'js/sweetalert2.min.js"></script>
+        '.$codigo.'
+		<!-- END JAVASCRIPT -->';
         return $js;
     }
     private function GenerateHeader()
@@ -70,7 +73,7 @@ class MasterPage
                             <ul class="header-nav header-nav-options">
                                 <li class="header-nav-brand" >
                                     <div class="brand-holder">
-                                        <a href="../../html/dashboards/dashboard.html">
+                                        <a href="index.php">
                                             <span class="text-lg text-bold text-primary">Punto de Venta</span>
                                         </a>
                                     </div>
@@ -88,18 +91,18 @@ class MasterPage
                             <ul class="header-nav header-nav-profile">
                                 <li class="dropdown">
                                     <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                                        <img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
+                                        <img src="'.RUTA_HTTP.'assets/img/avatar1.jpg?1403934956" alt="" />
                                         <span class="profile-info">
-                                            Daniel Johnson
+                                            Joel García
                                             <small>Administrator</small>
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu animation-dock">
                                         <li class="dropdown-header">Configuraciones</li>
-                                        <li><a href="../../html/pages/profile.html">Mi Perfil</a></li>
+                                        <li><a href="index.php">Mi Perfil</a></li>
                                         
                                         <li class="divider"></li>
-                                        <li><a href="../../html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i>Salir</a></li>
+                                        <li><a href="index.php"><i class="fa fa-fw fa-power-off text-danger"></i>Salir</a></li>
                                     </ul><!--end .dropdown-menu -->
                                 </li><!--end .dropdown -->
                             </ul><!--end .header-nav-profile -->
@@ -143,7 +146,7 @@ class MasterPage
 
                     <!-- BEGIN DASHBOARD -->
                     <li>
-                        <a href="../../html/dashboards/dashboard.html" >
+                        <a href="index.php" >
                             <div class="gui-icon"><i class="md md-home"></i></div>
                             <span class="title">Menú</span>
                         </a>
@@ -211,6 +214,5 @@ class MasterPage
 	{
 		return $this->GenerateHeader();
 	}
-
 }
 ?>
