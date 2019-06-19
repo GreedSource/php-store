@@ -69,6 +69,7 @@ class MasterPage
         <script src="'.RUTA_HTTP.'assets/dist/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="'.RUTA_HTTP.'assets/dist/js/demo.js"></script>
+        <script src="'.RUTA_HTTP.'js/active-menu.js"></script>
         '.$script.'
         <script>
             $(document).ready(function () {
@@ -83,9 +84,9 @@ class MasterPage
         $hc = '
         <header class="main-header">
     <!-- Logo -->
-    <a href="'.RUTA_HTTP.'administrar" class="logo">
+    <a href="'.RUTA_HTTP.'" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>T</span>
+      <span class="logo-mini"><b>A</b>S</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b>Architecture</b>Store</span>
     </a>
@@ -200,7 +201,7 @@ class MasterPage
             <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>-->
-        <li><a href="'.RUTA_HTTP.'marca"><i class="fa fa-book"></i> <span>Marca</span></a></li>
+        <li><a href="'.RUTA_HTTP.'"><i class="fa fa-book"></i> <span>Productos</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -241,7 +242,7 @@ class MasterPage
         return $sc;
     }
 
-    private function GenerateHeader($nombre = ''){
+    private function GenerateHeader($nombre = '', $title = ''){
         $hd = '
         <!DOCTYPE html>
 <html>
@@ -263,11 +264,10 @@ class MasterPage
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>Hola mundo</h1>
+        <h1>'.$title.'</h1>
       </section>
       <section class="content">
-        <div class="box">
-          
+        <div class="box" id="content">
         ';
         return $hd;
     }
@@ -291,8 +291,8 @@ class MasterPage
         return $btm;
     }
 
-    public function GetPage($nombre = ''){
-        return $this->GenerateHeader($nombre);
+    public function GetPage($nombre = '', $title = ''){
+        return $this->GenerateHeader($nombre, $title);
     }
 
     public function GetFooter($script = ''){

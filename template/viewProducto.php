@@ -20,55 +20,82 @@ class viewProducto
     public function __clone(){
         trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
     }
+
     private function GenerateTemplate($data){
         $tmp = '
-        <div class="row">
-            <input class="form-control" type="hidden" name="clave" value="'.$data['clave'].'">   
+        <div class="box-header with-border">
+            <h3 class="box-title">Add Product</h3>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label class="form-control">Nombre</label>
+        <form class="form-horizontal" id="form">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del producto" value="'.$this->Exist($data, 'name').'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Descripción:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Descripción del producto" value="'.$this->Exist($data, 'description').'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-sm-2 control-label">Precio:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="price" name="price" placeholder="Precio del producto" value="'.$this->Exist($data, 'price').'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stock" class="col-sm-2 control-label">Stock:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="stock" name="stock" placeholder="Cantidad del producto" value="'.$this->Exist($data, 'stock').'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_brand" class="col-sm-2 control-label">Marca:</label>
+                    <div class="col-sm-10">
+                        <select id="id_brand" name="id_brand" class="form-control">
+                            <option>Seleccionar</option>
+                            <option value="1">Coca cola</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_supplier" class="col-sm-2 control-label">Distribuidor:</label>
+                    <div class="col-sm-10">
+                        <select id="id_supplier" name="id_supplier" class="form-control">
+                            <option>Seleccionar</option>
+                            <option value="1">Bepensa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_category" class="col-sm-2 control-label">Categoria:</label>
+                    <div class="col-sm-10">
+                        <select id="id_category" name="id_category" class="form-control">
+                            <option>Seleccionar</option>
+                            <option value="1">Bebidas</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <input class="form-control" type="text" name="nombre" value="'.$data['nombre'].'">    
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="button" onclick="load(\'product\', \'gettable\')" class="btn btn-default">Cancelar</button>
+                <button type="submit" class="btn btn-info pull-right">Sign in</button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label class="form-control">Descripción</label>
-            </div>
-            <div class="col-md-3">
-                <input class="form-control" type="text" name="descripcion" value="'.utf8_encode($data['descripcion']).'">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label class="form-control">Precio</label>
-            </div>
-            <div class="col-md-3">
-                <input class="form-control" type="text" name="precio" value="'.$data['precio'].'">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label class="form-control">Precio de oferta</label>
-            </div>
-            <div class="col-md-3">
-                <input class="form-control" type="text" name="preciooferta" value="'.$data['preciooferta'].'">
-            </div>
-        </div>
-        <div class="row">
-            <input class="form-control" type="hidden" name="visible" value="'.$data['visible'].'">
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-6">
-                <button class="btn btn-primary" type="Guardar" id="actualizar" onclick="Update();">Actualizar</button>
-                <input type="submit" id="submit" value"enviar" onclick="Update();" style="display:none;">
-            </div>
-        </div>
-        ';
+            <!-- /.box-footer -->
+        </form>';
         return $tmp;
+    }
+
+    private function Exist($data, $val){
+        if(isset($data[$val])){
+            return $data[$val];
+        }else{
+            return null;
+        }
     }
 
     public function GetView($data){
